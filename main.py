@@ -33,18 +33,15 @@ Todo:
 """
 import random
 import time
-
 import numpy as np
 import pandas as pd
-
 from scipy import interpolate
+from matplotlib import pyplot as plt
 
 from sklearn.neural_network import MLPRegressor
 from sklearn import model_selection, metrics
 
-from matplotlib import pyplot as plt
-
-
+# local
 from setup import fileinfo, general
 
 
@@ -615,7 +612,6 @@ class Network():
 
     def loss_plot():
         pass
-
 
 
 def get_ic_params(file):
