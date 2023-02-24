@@ -6,6 +6,7 @@ import pandas as pd
 
 from sklearn.neural_network import MLPRegressor
 from sklearn import model_selection, metrics
+from matplotlib import pyplot as plt
 
 from setup import fileinfo, general
 
@@ -140,60 +141,122 @@ class Network():
 class TrainingData():
     """Training data model
 
-    If the class has public attributes, they may be documented here
-    in an ``Attributes`` section and follow the same formatting as a
-    function's ``Args`` section. Alternatively, attributes may be documented
-    inline with the attribute's declaration (see __init__ method below).
-
-    Properties created with the ``@property`` decorator should be documented
-    in the property's getter method.
-
     Args:
         name (string): Name to differentiate between different setups. 
             Should be unique since used in filenames when saving files. 
             Previous files with same name will be overwritten.
     
-    Optional kwargs:
+    Kwargs:
         These are optional arguments that can be used to modify the
         default settings.
 
-        hera (boolean): Use hera data instead of mock data.
-        parameters (list(string)): List of initial condition paramaters to use
-        in training.
+        input_type (str): Choose type of the input data.
+            Possible values are: 'F2', 'FL', 'HERA'.
+            Defaults to 'F2'.
+
+        parameters (list(string)): List of initial condition paramatrisations to use
+            in training. Possible ic's are:  'mvg', 'mve', 'mvge', 'mv2g', 'gbw', 'atan', or 'all'.
+            Defaults to  ['mvge'].
+
+        saturation_scale (float): Saturation scale value N(r^2 = 1/Qs^2) = saturation_scale. 
+            Used in saturation filter.  Use plot_saturation_scales() method to plot saturation scales.
+            Defaults to 1-np.exp(-0.25).
+
+        saturation_range (list): Range of saturation scale values that pass the saturation filter.
+            Use plot_saturation_scales() method to plot saturation scales.
+            Defaults to [0.1,1.0]. 
 
     """
     def __init__(self, 
                  name: str, 
-                 *,
-                 hera: bool = False,
+                 input_type: str = "F2",
                  parameters: list|str = ['mvge'],
-                 ) -> None:
+                 saturation_scale: float = general.SAT_SCALE,
+                 saturation_range: list = [0.1,1.0]
+                 ):
         
-
         self.name = name
-        self.settings = {"hera": hera, 
-                         "parameters": parameters}
-        
 
+        # check if valid input_type
+        if input_type not in {'F2', 'FL', 'HERA'}:
+            raise Exception(f"Invalid input type '{input_type}'")
+        
+        if 'all' in parameters:
+            parameters = ['mvg', 'mve', 'mvge', 'mv2g', 'gbw', 'atan']
+
+        self.settings = {"input_type": input_type, 
+                         "parameters": parameters,
+                         "saturation_scale": saturation_scale,
+                         "saturation_range": saturation_range}
+        
         self.filedict = self._make_filedict()
         self.training_files = None
         self.q_list = None
         self.x_list = None
 
+    def plot_saturation_scale(self, satscale=None, satrange=None):
+        if not satscale:
+            satscale = self.settings['saturation_scale']
+        if not satrange:
+            satrange = self.settings['saturation_range']
+
+        satmin = satrange[0]
+        satmax = satrange[1]
+
+        counts = dict()
+        count = 0
+        Qs = []
+
+        for ic in self.settings['parameters']:
+            for i in fileinfo.filenros[ic]["range"]:
+                file = f"{fileinfo.F2}f2_{i}.dat" 
+                if self.settings['input_type'] == 'HERA':
+                    Nrs, rs, stuff = rcs_reader(file)
+                else:
+                    Nrs, rs, F2s = F2_reader(file)
+                
+                r_sat = np.interp(satscale,Nrs,rs)
+                Qs.append(1/r_sat**2)
+
+                if satmin <= Qs[-1] <= satmax:
+                    count +=1
+            indx = list(fileinfo.filenros[ic]["range"])
+            plt.scatter(indx,Qs,label=ic, marker="+")
+            counts[ic] = (count,len(indx))
+            Qs = []
+            count = 0
+
+        print("number of files in each ic that would pass the filter")
+        for key,value in counts.items():
+            print(f"{key}: {value[0]}/{value[1]}")
+        plt.legend()
+        plt.axhline(y = satmin, color = 'r', linestyle = '--')
+        plt.axhline(y = satmax, color = 'r', linestyle = '--')
+        plt.suptitle(f"Saturation scale N$(r^2=1/Q^2_s)$ = {satscale:.2f}\n$Q_s^2$ cut $({satmin}...{satmax})$")
+        plt.legend(loc=2, prop={'size': 8})
+        plt.xlabel("filenro 'f2_i.dat'")
+        plt.ylabel("$Q_s^2$ [GeV$^2$]")
+        plt.yscale("log")
+        plt.tight_layout()
+
+        plt.savefig(f"{general.save_dir}{self.name}-saturation_scales.pdf")
+        plt.show()
+
     def _saturation_filter(self, filelist):
         '''
-        
         '''
         sat_scale = self.settings['saturation_scale']
-        sat_min = self.settings['sat_min']
-        sat_max = self.settings['sat_max']
+        satrange = self.settings['saturation_range']
+        sat_min = satrange[0]
+        sat_max = satrange[1]
+
         filtered_files = []
         
         for file in filelist:
-            if self.settings['hera']:
-                Nrs, rs, sigmaym = sigma_reader(file)
+            if self.settings['input_type'] == 'HERA':
+                Nrs, rs, sigmaym = rcs_reader(file)
             else:
-                Nrs, rs, F2s = F2reader(file)
+                Nrs, rs, F2s = F2_reader(file)
 
             if sat_scale==None:
                 SAT_Pass = True
@@ -214,10 +277,10 @@ class TrainingData():
         all_files = dict()
         for ic in self.settings['parameters']:
             # list all files
-            files = [f"{fileinfo.F2}_{i}.dat" for i in fileinfo.filenros[ic]]
+            files = [f"{fileinfo.F2}f2_{i}.dat" for i in fileinfo.filenros[ic]["range"]]
 
             # saturation filter
-            filtered = self.saturation_filter(files)
+            filtered = self._saturation_filter(files)
 
             all_files[ic] = filtered
 
@@ -307,11 +370,11 @@ class TrainingData():
 
         for file in self.training_files:
             if self.hera:
-                Nrs, rs, sigma_df = sigma_reader(file)
+                Nrs, rs, sigma_df = rcs_reader(file)
                 F2s = sigma_df['Sigma'].tolist()
 
             else:
-                Nrs, rs, F2s = F2reader(file)
+                Nrs, rs, F2s = F2_reader(file)
 
             if not r_break:
                 for i, r in enumerate(rs):
@@ -434,7 +497,7 @@ def runlogger(file, contents) -> None:
             f.write(f"{key}: {value}\n")
         f.write("\n")
 
-def F2reader(filename: str) -> list:
+def F2_reader(filename: str) -> list:
     '''reads .dat files made with BKtoF2-calculator'''
 
     with open(filename) as f:
@@ -451,7 +514,7 @@ def F2reader(filename: str) -> list:
 
     return Nrs, rs, F2s
 
-def sigma_reader(filename: str) -> tuple:
+def rcs_reader(filename: str) -> tuple:
     '''reads .dat files made with BKtoCS-calculator'''
 
     with open(filename) as f:
@@ -513,7 +576,8 @@ def main(datamodels: list|object, testfiles: list|str):
 
 
 if __name__ =="__main__":
-    datamodels = [TrainingData("data1")]
+    data1 = TrainingData("data_all", parameters = ['all'])
+    datamodels = [data1]
     testfiles = []
-
-    main(datamodels, testfiles)
+    data1.plot_saturation_scale()
+    # main(datamodels, testfiles)
