@@ -211,7 +211,7 @@ class TrainingData():
     def _input_interpolator():
         pass
 
-    def create_input_output(self, files_to_skip: list):
+    def create_training_data(self, files_to_skip: list):
         """ Creates input and output for network to use in training
 
         Args:
@@ -306,6 +306,49 @@ class TrainingData():
         self.inputs = train_input
         self.outputs = train_output
     
+    def create_test_data(self, file, testpoint_count):
+        '''
+        
+        '''
+        if self.settings['input_type'] == 'HERA':
+            Nrs, rs, sigma_df = rcs_reader(file)
+            F2s_orig = sigma_df['Sigma'].tolist()
+        else:    
+            Nrs, rs, F2s_orig = F2_reader(file)
+    
+        if not self.r_break:
+            for i, r in enumerate(rs):
+                if r >= self.settings['min_r']:
+                    break
+            self.r_break = i
+
+        rs = rs[self.r_break:]
+        Nrs = Nrs[self.r_break:]
+
+        F2s = F2s_orig
+
+        test_rs = np.logspace(np.log10(rs[0]),np.log10(rs[-1]),testpoint_count)
+        Nrs_interpolator = interpolate.interp1d(rs,Nrs)
+        test_Nrs = Nrs_interpolator(test_rs)
+
+        if self.LOG_R:
+            test_rs = np.log(test_rs)
+        if self.LOG_F:
+            F2s = np.log(F2s)
+        if self.LOG_N:
+            test_Nrs = np.log(test_Nrs)
+
+        if self.ADD_LOGR:
+            input = [[r,np.log(r),*F2s] for r in test_rs]
+        else:
+            input = [[r,*F2s] for r in test_rs]
+        output = test_Nrs
+        
+        if self.hera:
+            return input, output, F2s_orig, sigma_df
+        else:
+            return input, output, F2s_orig
+    
     def plot_saturation_scale(self, satscale=None, satrange=None):
         if not satscale:
             satscale = self.settings['saturation_scale']
@@ -354,49 +397,6 @@ class TrainingData():
         plt.savefig(f"{general.save_dir}{self.name}-saturation_scales.pdf")
         plt.show()
 
-    def get_test_data(self, file, testpoint_count):
-        '''
-        
-        '''
-        if self.settings['input_type'] == 'HERA':
-            Nrs, rs, sigma_df = rcs_reader(file)
-            F2s_orig = sigma_df['Sigma'].tolist()
-        else:    
-            Nrs, rs, F2s_orig = F2_reader(file)
-    
-        if not self.r_break:
-            for i, r in enumerate(rs):
-                if r >= self.settings['min_r']:
-                    break
-            self.r_break = i
-
-        rs = rs[self.r_break:]
-        Nrs = Nrs[self.r_break:]
-
-        F2s = F2s_orig
-
-        test_rs = np.logspace(np.log10(rs[0]),np.log10(rs[-1]),testpoint_count)
-        Nrs_interpolator = interpolate.interp1d(rs,Nrs)
-        test_Nrs = Nrs_interpolator(test_rs)
-
-        if self.LOG_R:
-            test_rs = np.log(test_rs)
-        if self.LOG_F:
-            F2s = np.log(F2s)
-        if self.LOG_N:
-            test_Nrs = np.log(test_Nrs)
-
-        if self.ADD_LOGR:
-            input = [[r,np.log(r),*F2s] for r in test_rs]
-        else:
-            input = [[r,*F2s] for r in test_rs]
-        output = test_Nrs
-        
-        if self.hera:
-            return input, output, F2s_orig, sigma_df
-        else:
-            return input, output, F2s_orig
-    
 
 class Network():
     """Neural network
@@ -739,7 +739,7 @@ def main(datamodels: list|object, testfiles: list|str):
     # train networks for different data models
     trained_networks = []
     for data in datamodels:
-        data.create_input_output(files_to_skip=testfiles)
+        data.create_training_data(files_to_skip=testfiles)
         nn = Network()
         nn.train(data,general.train_frac)
         nn.score(data.testdata)
