@@ -1,0 +1,89 @@
+### MVge files info
+### Qs0sqr = seq 0.05 0.15 0.5
+### gamma = seq 0.4 0.4 2.0
+### ec = 2^e, e = seq 1 2 7
+### x0 = 0.01
+### minr = 1e-6
+### maxy = 10.0
+### ystep = 0.2
+### alphascale = 7.0
+mvge-Qs0sqr_0.05-gamma_0.4-ec_2.dat
+mvge-Qs0sqr_0.05-gamma_0.4-ec_8.dat
+mvge-Qs0sqr_0.05-gamma_0.4-ec_32.dat
+mvge-Qs0sqr_0.05-gamma_0.4-ec_128.dat
+mvge-Qs0sqr_0.05-gamma_0.8-ec_2.dat
+mvge-Qs0sqr_0.05-gamma_0.8-ec_8.dat
+mvge-Qs0sqr_0.05-gamma_0.8-ec_32.dat
+mvge-Qs0sqr_0.05-gamma_0.8-ec_128.dat
+mvge-Qs0sqr_0.05-gamma_1.2-ec_2.dat
+mvge-Qs0sqr_0.05-gamma_1.2-ec_8.dat
+mvge-Qs0sqr_0.05-gamma_1.2-ec_32.dat
+mvge-Qs0sqr_0.05-gamma_1.2-ec_128.dat
+mvge-Qs0sqr_0.05-gamma_1.6-ec_2.dat
+mvge-Qs0sqr_0.05-gamma_1.6-ec_8.dat
+mvge-Qs0sqr_0.05-gamma_1.6-ec_32.dat
+mvge-Qs0sqr_0.05-gamma_1.6-ec_128.dat
+mvge-Qs0sqr_0.05-gamma_2.0-ec_2.dat
+mvge-Qs0sqr_0.05-gamma_2.0-ec_8.dat
+mvge-Qs0sqr_0.05-gamma_2.0-ec_32.dat
+mvge-Qs0sqr_0.05-gamma_2.0-ec_128.dat
+mvge-Qs0sqr_0.20-gamma_0.4-ec_2.dat
+mvge-Qs0sqr_0.20-gamma_0.4-ec_8.dat
+mvge-Qs0sqr_0.20-gamma_0.4-ec_32.dat
+mvge-Qs0sqr_0.20-gamma_0.4-ec_128.dat
+mvge-Qs0sqr_0.20-gamma_0.8-ec_2.dat
+mvge-Qs0sqr_0.20-gamma_0.8-ec_8.dat
+mvge-Qs0sqr_0.20-gamma_0.8-ec_32.dat
+mvge-Qs0sqr_0.20-gamma_0.8-ec_128.dat
+mvge-Qs0sqr_0.20-gamma_1.2-ec_2.dat
+mvge-Qs0sqr_0.20-gamma_1.2-ec_8.dat
+mvge-Qs0sqr_0.20-gamma_1.2-ec_32.dat
+mvge-Qs0sqr_0.20-gamma_1.2-ec_128.dat
+mvge-Qs0sqr_0.20-gamma_1.6-ec_2.dat
+mvge-Qs0sqr_0.20-gamma_1.6-ec_8.dat
+mvge-Qs0sqr_0.20-gamma_1.6-ec_32.dat
+mvge-Qs0sqr_0.20-gamma_1.6-ec_128.dat
+mvge-Qs0sqr_0.20-gamma_2.0-ec_2.dat
+mvge-Qs0sqr_0.20-gamma_2.0-ec_8.dat
+mvge-Qs0sqr_0.20-gamma_2.0-ec_32.dat
+mvge-Qs0sqr_0.20-gamma_2.0-ec_128.dat
+mvge-Qs0sqr_0.35-gamma_0.4-ec_2.dat
+mvge-Qs0sqr_0.35-gamma_0.4-ec_8.dat
+mvge-Qs0sqr_0.35-gamma_0.4-ec_32.dat
+mvge-Qs0sqr_0.35-gamma_0.4-ec_128.dat
+mvge-Qs0sqr_0.35-gamma_0.8-ec_2.dat
+mvge-Qs0sqr_0.35-gamma_0.8-ec_8.dat
+mvge-Qs0sqr_0.35-gamma_0.8-ec_32.dat
+mvge-Qs0sqr_0.35-gamma_0.8-ec_128.dat
+mvge-Qs0sqr_0.35-gamma_1.2-ec_2.dat
+mvge-Qs0sqr_0.35-gamma_1.2-ec_8.dat
+mvge-Qs0sqr_0.35-gamma_1.2-ec_32.dat
+mvge-Qs0sqr_0.35-gamma_1.2-ec_128.dat
+mvge-Qs0sqr_0.35-gamma_1.6-ec_2.dat
+mvge-Qs0sqr_0.35-gamma_1.6-ec_8.dat
+mvge-Qs0sqr_0.35-gamma_1.6-ec_32.dat
+mvge-Qs0sqr_0.35-gamma_1.6-ec_128.dat
+mvge-Qs0sqr_0.35-gamma_2.0-ec_2.dat
+mvge-Qs0sqr_0.35-gamma_2.0-ec_8.dat
+mvge-Qs0sqr_0.35-gamma_2.0-ec_32.dat
+mvge-Qs0sqr_0.35-gamma_2.0-ec_128.dat
+mvge-Qs0sqr_0.50-gamma_0.4-ec_2.dat
+mvge-Qs0sqr_0.50-gamma_0.4-ec_8.dat
+mvge-Qs0sqr_0.50-gamma_0.4-ec_32.dat
+mvge-Qs0sqr_0.50-gamma_0.4-ec_128.dat
+mvge-Qs0sqr_0.50-gamma_0.8-ec_2.dat
+mvge-Qs0sqr_0.50-gamma_0.8-ec_8.dat
+mvge-Qs0sqr_0.50-gamma_0.8-ec_32.dat
+mvge-Qs0sqr_0.50-gamma_0.8-ec_128.dat
+mvge-Qs0sqr_0.50-gamma_1.2-ec_2.dat
+mvge-Qs0sqr_0.50-gamma_1.2-ec_8.dat
+mvge-Qs0sqr_0.50-gamma_1.2-ec_32.dat
+mvge-Qs0sqr_0.50-gamma_1.2-ec_128.dat
+mvge-Qs0sqr_0.50-gamma_1.6-ec_2.dat
+mvge-Qs0sqr_0.50-gamma_1.6-ec_8.dat
+mvge-Qs0sqr_0.50-gamma_1.6-ec_32.dat
+mvge-Qs0sqr_0.50-gamma_1.6-ec_128.dat
+mvge-Qs0sqr_0.50-gamma_2.0-ec_2.dat
+mvge-Qs0sqr_0.50-gamma_2.0-ec_8.dat
+mvge-Qs0sqr_0.50-gamma_2.0-ec_32.dat
+mvge-Qs0sqr_0.50-gamma_2.0-ec_128.dat

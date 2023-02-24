@@ -1,0 +1,70 @@
+### MV2g files info
+### Qs0sqr = seq 0.05 0.15 0.35
+### Qs0sqr2 = seq Qs0sqr+0.15 0.15 0.5
+### gamma = seq 0.4 0.4 1.6
+### gamma2 = seq gamma+0.4 0.4 2.0
+### x0 = 0.01
+### minr = 1e-6
+### maxy = 10.0
+### ystep = 0.2
+### alphascale = 7.0
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_0.4-gamma2_0.8.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_0.4-gamma2_1.2.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_0.4-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_0.4-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_0.8-gamma2_1.2.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_0.8-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_0.8-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_1.2-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_1.2-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.20-gamma_1.6-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_0.4-gamma2_0.8.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_0.4-gamma2_1.2.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_0.4-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_0.4-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_0.8-gamma2_1.2.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_0.8-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_0.8-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_1.2-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_1.2-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.35-gamma_1.6-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_0.4-gamma2_0.8.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_0.4-gamma2_1.2.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_0.4-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_0.4-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_0.8-gamma2_1.2.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_0.8-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_0.8-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_1.2-gamma2_1.6.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_1.2-gamma2_2.0.dat
+mv2g-Qs0sqr_0.05-Qs0sqr2_0.50-gamma_1.6-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_0.4-gamma2_0.8.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_0.4-gamma2_1.2.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_0.4-gamma2_1.6.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_0.4-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_0.8-gamma2_1.2.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_0.8-gamma2_1.6.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_0.8-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_1.2-gamma2_1.6.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_1.2-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.35-gamma_1.6-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_0.4-gamma2_0.8.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_0.4-gamma2_1.2.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_0.4-gamma2_1.6.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_0.4-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_0.8-gamma2_1.2.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_0.8-gamma2_1.6.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_0.8-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_1.2-gamma2_1.6.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_1.2-gamma2_2.0.dat
+mv2g-Qs0sqr_0.20-Qs0sqr2_0.50-gamma_1.6-gamma2_2.0.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_0.4-gamma2_0.8.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_0.4-gamma2_1.2.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_0.4-gamma2_1.6.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_0.4-gamma2_2.0.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_0.8-gamma2_1.2.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_0.8-gamma2_1.6.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_0.8-gamma2_2.0.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_1.2-gamma2_1.6.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_1.2-gamma2_2.0.dat
+mv2g-Qs0sqr_0.35-Qs0sqr2_0.50-gamma_1.6-gamma2_2.0.dat

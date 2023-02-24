@@ -1,0 +1,26 @@
+# Information about the code used to
+# make this file and some details
+# of the parameters used such as:
+# Initial conditions
+# Y limit
+# r limits
+### r min
+### r multiplier
+### number of r values
+### x
+### Y_0
+N(Y_0, r_0)
+N(Y_0, r_1)
+N(Y_0, r_2)
+...
+N(Y_0, r_i)
+### Y_1
+N(Y_1, r_0)
+N(Y_1, r_1)
+N(Y_1, r_2)
+...
+N(Y_1, r_i)
+### Y_2
+...
+
+and r_i = r_min*r_multiplier*x^i

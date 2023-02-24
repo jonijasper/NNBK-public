@@ -1,0 +1,88 @@
+### MVe files info
+### Qs0sqr = seq 0.05 0.05 0.5
+### ec = 2^e, e = seq 0 1 7
+### x0 = 0.01
+### minr = 1e-6
+### maxy = 10.0
+### ystep = 0.2
+### alphascale = 7.0
+mve-Qs0sqr_0.05-ec_1.dat
+mve-Qs0sqr_0.05-ec_2.dat
+mve-Qs0sqr_0.05-ec_4.dat
+mve-Qs0sqr_0.05-ec_8.dat
+mve-Qs0sqr_0.05-ec_16.dat
+mve-Qs0sqr_0.05-ec_32.dat
+mve-Qs0sqr_0.05-ec_64.dat
+mve-Qs0sqr_0.05-ec_128.dat
+mve-Qs0sqr_0.10-ec_1.dat
+mve-Qs0sqr_0.10-ec_2.dat
+mve-Qs0sqr_0.10-ec_4.dat
+mve-Qs0sqr_0.10-ec_8.dat
+mve-Qs0sqr_0.10-ec_16.dat
+mve-Qs0sqr_0.10-ec_32.dat
+mve-Qs0sqr_0.10-ec_64.dat
+mve-Qs0sqr_0.10-ec_128.dat
+mve-Qs0sqr_0.15-ec_1.dat
+mve-Qs0sqr_0.15-ec_2.dat
+mve-Qs0sqr_0.15-ec_4.dat
+mve-Qs0sqr_0.15-ec_8.dat
+mve-Qs0sqr_0.15-ec_16.dat
+mve-Qs0sqr_0.15-ec_32.dat
+mve-Qs0sqr_0.15-ec_64.dat
+mve-Qs0sqr_0.15-ec_128.dat
+mve-Qs0sqr_0.20-ec_1.dat
+mve-Qs0sqr_0.20-ec_2.dat
+mve-Qs0sqr_0.20-ec_4.dat
+mve-Qs0sqr_0.20-ec_8.dat
+mve-Qs0sqr_0.20-ec_16.dat
+mve-Qs0sqr_0.20-ec_32.dat
+mve-Qs0sqr_0.20-ec_64.dat
+mve-Qs0sqr_0.20-ec_128.dat
+mve-Qs0sqr_0.25-ec_1.dat
+mve-Qs0sqr_0.25-ec_2.dat
+mve-Qs0sqr_0.25-ec_4.dat
+mve-Qs0sqr_0.25-ec_8.dat
+mve-Qs0sqr_0.25-ec_16.dat
+mve-Qs0sqr_0.25-ec_32.dat
+mve-Qs0sqr_0.25-ec_64.dat
+mve-Qs0sqr_0.25-ec_128.dat
+mve-Qs0sqr_0.30-ec_1.dat
+mve-Qs0sqr_0.30-ec_2.dat
+mve-Qs0sqr_0.30-ec_4.dat
+mve-Qs0sqr_0.30-ec_8.dat
+mve-Qs0sqr_0.30-ec_16.dat
+mve-Qs0sqr_0.30-ec_32.dat
+mve-Qs0sqr_0.30-ec_64.dat
+mve-Qs0sqr_0.30-ec_128.dat
+mve-Qs0sqr_0.35-ec_1.dat
+mve-Qs0sqr_0.35-ec_2.dat
+mve-Qs0sqr_0.35-ec_4.dat
+mve-Qs0sqr_0.35-ec_8.dat
+mve-Qs0sqr_0.35-ec_16.dat
+mve-Qs0sqr_0.35-ec_32.dat
+mve-Qs0sqr_0.35-ec_64.dat
+mve-Qs0sqr_0.35-ec_128.dat
+mve-Qs0sqr_0.40-ec_1.dat
+mve-Qs0sqr_0.40-ec_2.dat
+mve-Qs0sqr_0.40-ec_4.dat
+mve-Qs0sqr_0.40-ec_8.dat
+mve-Qs0sqr_0.40-ec_16.dat
+mve-Qs0sqr_0.40-ec_32.dat
+mve-Qs0sqr_0.40-ec_64.dat
+mve-Qs0sqr_0.40-ec_128.dat
+mve-Qs0sqr_0.45-ec_1.dat
+mve-Qs0sqr_0.45-ec_2.dat
+mve-Qs0sqr_0.45-ec_4.dat
+mve-Qs0sqr_0.45-ec_8.dat
+mve-Qs0sqr_0.45-ec_16.dat
+mve-Qs0sqr_0.45-ec_32.dat
+mve-Qs0sqr_0.45-ec_64.dat
+mve-Qs0sqr_0.45-ec_128.dat
+mve-Qs0sqr_0.50-ec_1.dat
+mve-Qs0sqr_0.50-ec_2.dat
+mve-Qs0sqr_0.50-ec_4.dat
+mve-Qs0sqr_0.50-ec_8.dat
+mve-Qs0sqr_0.50-ec_16.dat
+mve-Qs0sqr_0.50-ec_32.dat
+mve-Qs0sqr_0.50-ec_64.dat
+mve-Qs0sqr_0.50-ec_128.dat
