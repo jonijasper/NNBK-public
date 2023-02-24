@@ -37,9 +37,13 @@ import time
 import numpy as np
 import pandas as pd
 
+from scipy import interpolate
+
 from sklearn.neural_network import MLPRegressor
 from sklearn import model_selection, metrics
+
 from matplotlib import pyplot as plt
+
 
 from setup import fileinfo, general
 
@@ -100,6 +104,7 @@ class TrainingData():
         self.training_files = None
         self.q_list = None
         self.x_list = None
+        self.r_break = None
 
     def _saturation_filter(self, filelist):
         '''
@@ -226,7 +231,6 @@ class TrainingData():
 
         train_input = []
         train_output = []
-        r_break=None
 
         for file in self.training_files:
             if self.hera:
@@ -236,14 +240,14 @@ class TrainingData():
             else:
                 Nrs, rs, F2s = F2_reader(file)
 
-            if not r_break:
+            if not self.r_break:
                 for i, r in enumerate(rs):
                     if r >= self.settings['min_r']:
                         break
-                r_break = i
+                self.r_break = i
 
-            rs = rs[r_break:]
-            Nrs = Nrs[r_break:]
+            rs = rs[self.r_break:]
+            Nrs = Nrs[self.r_break:]
 
             # test smallest r
             if rs[0] < self.settings['min_r']:
@@ -350,6 +354,49 @@ class TrainingData():
         plt.savefig(f"{general.save_dir}{self.name}-saturation_scales.pdf")
         plt.show()
 
+    def get_test_data(self, file, testpoint_count):
+        '''
+        
+        '''
+        if self.settings['input_type'] == 'HERA':
+            Nrs, rs, sigma_df = rcs_reader(file)
+            F2s_orig = sigma_df['Sigma'].tolist()
+        else:    
+            Nrs, rs, F2s_orig = F2_reader(file)
+    
+        if not self.r_break:
+            for i, r in enumerate(rs):
+                if r >= self.settings['min_r']:
+                    break
+            self.r_break = i
+
+        rs = rs[self.r_break:]
+        Nrs = Nrs[self.r_break:]
+
+        F2s = F2s_orig
+
+        test_rs = np.logspace(np.log10(rs[0]),np.log10(rs[-1]),testpoint_count)
+        Nrs_interpolator = interpolate.interp1d(rs,Nrs)
+        test_Nrs = Nrs_interpolator(test_rs)
+
+        if self.LOG_R:
+            test_rs = np.log(test_rs)
+        if self.LOG_F:
+            F2s = np.log(F2s)
+        if self.LOG_N:
+            test_Nrs = np.log(test_Nrs)
+
+        if self.ADD_LOGR:
+            input = [[r,np.log(r),*F2s] for r in test_rs]
+        else:
+            input = [[r,*F2s] for r in test_rs]
+        output = test_Nrs
+        
+        if self.hera:
+            return input, output, F2s_orig, sigma_df
+        else:
+            return input, output, F2s_orig
+    
 
 class Network():
     """Neural network
@@ -705,7 +752,7 @@ def main(datamodels: list|object, testfiles: list|str):
 
 if __name__ =="__main__":
     data1 = TrainingData("data_all", parameters = ['all'])
-    datamodels = [data1]
-    testfiles = []
     data1.plot_saturation_scale()
+    # datamodels = [data1]
+    # testfiles = []
     # main(datamodels, testfiles)
