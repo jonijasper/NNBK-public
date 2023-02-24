@@ -197,6 +197,15 @@ class TrainingData():
         
         return all_files
 
+    def _remove_half_params():
+        pass
+
+    def _remove_half_F2s():
+        pass
+    
+    def _input_interpolator():
+        pass
+
     def create_input_output(self, files_to_skip: list):
         """ Creates input and output for network to use in training
 
@@ -361,6 +370,84 @@ class Network():
         if dummy:
             self.dummy_regr = MLPRegressor()
 
+    def _prediction_uncertainty(self,
+                                test_input, 
+                                number_of_variations: int =100, 
+                                standard_deviation: float =0.05,
+                                hera_error: list =None):
+        '''Shifts F2 values in input using gaussian dirstribution around the F2 values,
+        makes predictions from variated inputs, and calculates standard deviation of
+        the predictions for each r.
+
+        Returns:
+            pred_std, pred_mean, predlist
+        '''
+        gaussian_input = []
+        pred_std = []
+        predlist = []
+
+        r_list = np.array(test_input).T[0]
+        # TODO: two r input
+        two_r_input = False
+        if two_r_input:
+            f2input = test_input[0][2:]
+        else:
+            f2input = test_input[0][1:]
+
+        # TODO: make better check if F2 or log(F2)
+        log_F2 = any(f2<0 for f2 in f2input)
+
+        if log_F2:
+            f2values = np.exp(f2input)
+        else:
+            f2values = f2input
+
+        a = general.RANDOM_SEED+1
+        b = a + number_of_variations
+        for s in range(a, b):
+            random.seed(s)
+            gaussed_values = []
+            if hera_error:
+                for sigma,e in zip(f2values,hera_error):
+                    gaussed_values.append(random.gauss(sigma,0.01*e*sigma))
+
+            else:    
+                for f2 in f2values:
+                    gaussed_values.append(random.gauss(f2,standard_deviation*f2))
+
+            if log_F2:
+                if any(num_<=0 for num_ in gaussed_values):
+                        raise Exception("STAND_DEV too large, non positive F2 values")
+                gauss_in = np.log(gaussed_values)
+            else:
+                gauss_in = gaussed_values
+
+            if two_r_input:
+                gaussian_input = [[r,np.log(r), *gauss_in] for r in r_list]
+            else: 
+                gaussian_input = [[r, *gauss_in] for r in r_list]
+
+            predictions = self.predict(gaussian_input)
+            pred = predictions[1]
+
+            # TODO: N>1 cut
+            CUT_N = False
+            LOG_N = False
+            if CUT_N:
+                if LOG_N:
+                    linear_prediction = np.exp(pred)
+                    linear_prediction[linear_prediction>1] = 1
+                    pred = np.log(linear_prediction)
+                else:
+                    pred[pred>1] = 1
+
+            predlist.append(pred)
+
+        pred_std = np.std(predlist, axis=0)
+        pred_mean = np.mean(predlist, axis=0)
+
+        return pred_std, pred_mean, predlist
+
     def test(testdata):
         '''
         
@@ -478,6 +565,10 @@ class Network():
         test_pred = self.nn.predict(input)
 
         return dummy_pred, test_pred
+
+    def loss_plot():
+        pass
+
 
 
 def get_ic_params(file):
