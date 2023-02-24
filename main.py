@@ -1,3 +1,36 @@
+"""Example Google style docstrings.
+
+This module demonstrates documentation as specified by the `Google Python
+Style Guide`_. Docstrings may extend over multiple lines. Sections are created
+with a section header and a colon followed by a block of indented text.
+
+Example:
+    Examples can be given using either the ``Example`` or ``Examples``
+    sections. Sections support any reStructuredText formatting, including
+    literal blocks::
+
+        $ python example_google.py
+
+Section breaks are created by resuming unindented text. Section breaks
+are also implicitly created anytime a new section starts.
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+        Either form is acceptable, but the two should not be mixed. Choose
+        one convention to document module level variables and be consistent
+        with it.
+
+Todo:
+    * For module TODOs
+    * You have to also use ``sphinx.ext.todo`` extension
+
+.. _Google Python Style Guide:
+   https://google.github.io/styleguide/pyguide.html
+
+"""
 import random
 import time
 
@@ -9,133 +42,6 @@ from sklearn import model_selection, metrics
 from matplotlib import pyplot as plt
 
 from setup import fileinfo, general
-
-
-class Network():
-    """Neural network
-
-    Args:
-        name (string): Name to differentiate between different setups. 
-            Should be unique since used in filenames when saving files. 
-            Previous files with same name will be overwritten.
-        dummy (boolean): Create dummy network to compare scoring
-
-    """
-    def __init__(self, name: str, dummy=False, **kwargs):
-
-        self.name = name
-        self.regressor = MLPRegressor(**kwargs)
-
-        if dummy:
-            self.dummy_regr = MLPRegressor()
-
-    def test(testdata):
-        pass
-
-    def train(self, training_data, train_frac):
-        '''Trains the network and calculates performance score 
-        (set in setup.setup) by using a fraction trainfrac of 
-        training data to train and rest are set aside for scoring
-        
-        Args:
-            training_data (obj): training data instance used for training
-
-        :train_frac: float, fraction of data used in training, rest is used for
-                            cross validation scoring
-        
-        '''
-        input_ = training_data.inputs
-        output_ = training_data.outputs
-
-        if not (input_ and output_):
-            raise Exception("create input and output from data")
-
-        train_input, test_input, train_output, test_output = model_selection.train_test_split(
-                    input_, output_, random_state=general.RANDOM_SEED,
-                    train_size=train_frac)
-
-        runlogger(f"runlogs/{training_data.name}-runinfo.txt", 
-                    {"Datapoints splitted. Training points (rest for scoretest)":
-                        f"{len(train_input)}/{len(input_)}",
-                    "Number of inputs": 
-                        len(train_input[0])})
-
-        if self.dummy_regr:
-            self.dummy_regr.fit(train_input,train_output)
-
-        self.regressor.fit(train_input, train_output)
-
-        self._test_input = test_input
-        self._test_output = test_output
-
-    def score(self, test_input=None, test_output=None, weights=False):
-        dummy_pred, test_pred = self.predict(test_input)
-        
-        if not (test_input and test_output):
-            print("using default test split for scoring")
-            test_input = self._test_input
-            test_output = self._test_output
-
-        if self.LOG_N:
-            dummy_pred = np.exp(dummy_pred)
-            test_pred = np.exp(test_pred)
-            test_output = np.exp(test_output)
-        
-        if weights:
-            w = 1/np.array(test_pred)
-        else:
-            w = None
-
-        rmse_score = metrics.mean_squared_error(test_output,test_pred,
-                        sample_weight=w,squared=False)
-        
-        R2_score = self.regressor.score(test_input,test_output)
-
-        if self.dummy_regr:
-            rmse_dummy = metrics.mean_squared_error(test_output,dummy_pred,
-                        sample_weight=w,squared=False)
-            R2_dummy = self.dummy_regr.score(test_input,test_output)
-        else:
-            rmse_dummy = -1
-            R2_dummy = -1
-            
-        print(f"{self.name} scores for testgroup (dummy model):\n"\
-            f"  R2: {R2_score:.3f} ({R2_dummy:.3f})\n"\
-            f"  RMSE: {rmse_score:.1e} ({rmse_dummy:.1e})\n")
-
-        runlogger(f"{self.name}-runinfo.txt",
-                    {"R2 score (dummy model)": f"{R2_score} ({R2_dummy})",
-                    f"RMSE (dummy model)": f"{rmse_score} ({rmse_dummy})",})
-
-    def plot_testgroup_predictions(self, test_output, preds):
-        # fig0,ax0 = plt.subplots()
-        # ax0.scatter(test_output,preds[1], s=4, c=setup.colors[2], label="model")
-        # if self.dummy_regr:
-        #     ax0.scatter(test_output,preds[0], s=4, c=setup.colors[3],label="dummy")
-        
-        # ax0.plot([0,1],[0,1], 'k--', alpha=0.9, label="x=y")
-
-        # ax0.set_xlim(0,1)
-        # ax0.set_ylim(0,1.5)
-        # ax0.set_ylabel("network prediction")
-        # ax0.set_xlabel("target value")
-
-        # ax0.legend(**setup.leg_kwargs)
-        # plt.tight_layout()
-        # fig0.savefig(f"{setup.save_dir}{self.name}-testgroup_preds.pdf")
-        # # plt.show()
-        # plt.close(fig0)
-        pass
-
-    def predict(self, input):
-        if self.dummy_regr:
-            dummy_pred = self.dummy_regr.predict(input)
-        else:
-            dummy_pred = -1
-
-        test_pred = self.nn.predict(input)
-
-        return dummy_pred, test_pred
 
 
 class TrainingData():
@@ -293,21 +199,20 @@ class TrainingData():
         # choose method to deal with N=0 values:
 
         # --- skip whole files where N values nonloggable ---
-        '''
-        # runlogger(f"{self.name}-runinfo.txt",
+        # runlogger(self.name,
         #             {"file skipped, N(r)=0 prevents log(N)":
         #                 f"\n{f2filename} ({bk_})\n{params_}"})
         # skipped_counter[icstr] += 1
         # continue
-        '''
+
 
         # --- remove individual N(r)=0 points ---
         f2filename = file.split('/')[-1]
-        bk_, icstr, params_ = funcs.get_ic_params(file)
+        bk_, icstr, params_ = get_ic_params(file)
         for _i,_N in enumerate(Nrs):
             if _N > 0:
                 break
-        runlogger(f"{self.name}-runinfo.txt",
+        runlogger(self.name,
                 {f"{_i}/{len(Nrs)} N(r) values removed (N=0) from":
                         f"\n{f2filename} ({bk_})\n{params_}"})
 
@@ -334,26 +239,19 @@ class TrainingData():
                 all_files.append(testfiles_removed)
                 print(f"{len(all_files[-1])} {ic} files")
     
-        runlogger(f"{self.name}-runinfo.txt",
+        runlogger(self.name,
                     {f"{ic} files": len(all_files[-1])})
         
         return all_files
 
     def create_input_output(self, files_to_skip: list):
-        """Class methods are similar to regular functions.
-
-        Note:
-            Do not include the `self` parameter in the ``Args`` section.
+        """ Creates input and output for network to use in training
 
         Args:
-            param1: The first parameter.
-            param2: The second parameter.
-
-        Returns:
-            True if successful, False otherwise.
+            files_to_skip (list): files that will not be added to training data
+                so they can be used in testing.
 
         """
-
         self.training_files = self._make_filelist(files_to_skip)
 
         # check that test files are out
@@ -399,7 +297,7 @@ class TrainingData():
                 add_Nr = np.ones(len(add_r))
                 rs.extend(add_r)
                 Nrs.extend(add_Nr)
-                runlogger(f"{self.name}-runinfo.txt",
+                runlogger(self.name,
                             {f"added N(r)=1 points:":
                                 f"{len(add_r)} from r={add_r[0]} to r={add_r[-1]}"})
 
@@ -425,11 +323,11 @@ class TrainingData():
                     train_output.append(_Nr)
 
 
-        runlogger(f"{self.name}-runinfo.txt",{"skipped/ics":""})
-        runlogger(f"{self.name}-runinfo.txt", skipped_counter)
+        runlogger(self.name,{"skipped/ics":""})
+        runlogger(self.name, skipped_counter)
 
 
-        runlogger(f"{self.name}-runinfo.txt",
+        runlogger(self.name,
             {f"{i} rs < min_r={self.settings['min_r']} removed": "",
             f"{filecounter} different ic in training data":""})
 
@@ -441,6 +339,143 @@ class TrainingData():
 
         self.inputs = train_input
         self.outputs = train_output
+
+
+class Network():
+    """Neural network
+
+    Args:
+        name (string): Name to differentiate between different setups. 
+            Should be unique since used in filenames when saving files. 
+            Previous files with same name will be overwritten.
+        dummy (boolean): Create dummy network to compare scoring
+
+    """
+    def __init__(self, name: str, dummy=False, **kwargs):
+
+        self.name = name
+        self.regressor = MLPRegressor(**kwargs)
+
+        if dummy:
+            self.dummy_regr = MLPRegressor()
+
+    def test(testdata):
+        '''
+        
+        '''
+        pass
+
+    def train(self, training_data: TrainingData, train_frac: float):
+        '''Trains the network
+        
+        Args:
+            training_data (obj): training data instance used for training
+
+            train_frac (float), Value from range [0,1]. Sets the fraction of data used in training, 
+                rest is reserved for scoring
+        
+        '''
+        input_ = training_data.inputs
+        output_ = training_data.outputs
+
+        if not (input_ and output_):
+            raise Exception("create input and output from data")
+
+        train_input, test_input, train_output, test_output = model_selection.train_test_split(
+                    input_, output_, random_state=general.RANDOM_SEED,
+                    train_size=train_frac)
+
+        runlogger(f"runlogs/{training_data.name}-runinfo.txt", 
+                    {"Datapoints splitted. Training points (rest for scoretest)":
+                        f"{len(train_input)}/{len(input_)}",
+                    "Number of inputs": 
+                        len(train_input[0])})
+
+        if self.dummy_regr:
+            self.dummy_regr.fit(train_input,train_output)
+
+        self.regressor.fit(train_input, train_output)
+
+        self._test_input = test_input
+        self._test_output = test_output
+
+    def score(self, test_input: list =None, test_output: list =None, weights: bool =False):
+        '''
+        
+        '''
+        dummy_pred, test_pred = self.predict(test_input)
+        
+        if not (test_input and test_output):
+            print("using default test split for scoring")
+            test_input = self._test_input
+            test_output = self._test_output
+
+        if self.LOG_N:
+            dummy_pred = np.exp(dummy_pred)
+            test_pred = np.exp(test_pred)
+            test_output = np.exp(test_output)
+        
+        if weights:
+            w = 1/np.array(test_pred)
+        else:
+            w = None
+
+        rmse_score = metrics.mean_squared_error(test_output,test_pred,
+                        sample_weight=w,squared=False)
+        
+        R2_score = self.regressor.score(test_input,test_output)
+
+        if self.dummy_regr:
+            rmse_dummy = metrics.mean_squared_error(test_output,dummy_pred,
+                        sample_weight=w,squared=False)
+            R2_dummy = self.dummy_regr.score(test_input,test_output)
+        else:
+            rmse_dummy = -1
+            R2_dummy = -1
+            
+        print(f"{self.name} scores for testgroup (dummy model):\n"\
+            f"  R2: {R2_score:.3f} ({R2_dummy:.3f})\n"\
+            f"  RMSE: {rmse_score:.1e} ({rmse_dummy:.1e})\n")
+
+        runlogger(self.name,
+                    {"R2 score (dummy model)": f"{R2_score} ({R2_dummy})",
+                    f"RMSE (dummy model)": f"{rmse_score} ({rmse_dummy})",})
+
+    def plot_testgroup_predictions(self, test_output, preds):
+        '''
+        
+        '''
+        # fig0,ax0 = plt.subplots()
+        # ax0.scatter(test_output,preds[1], s=4, c=setup.colors[2], label="model")
+        # if self.dummy_regr:
+        #     ax0.scatter(test_output,preds[0], s=4, c=setup.colors[3],label="dummy")
+        
+        # ax0.plot([0,1],[0,1], 'k--', alpha=0.9, label="x=y")
+
+        # ax0.set_xlim(0,1)
+        # ax0.set_ylim(0,1.5)
+        # ax0.set_ylabel("network prediction")
+        # ax0.set_xlabel("target value")
+
+        # ax0.legend(**setup.leg_kwargs)
+        # plt.tight_layout()
+        # fig0.savefig(f"{setup.save_dir}{self.name}-testgroup_preds.pdf")
+        # # plt.show()
+        # plt.close(fig0)
+        pass
+
+    def predict(self, input):
+        '''
+        
+        '''
+        if self.dummy_regr:
+            dummy_pred = self.dummy_regr.predict(input)
+        else:
+            dummy_pred = -1
+
+        test_pred = self.nn.predict(input)
+
+        return dummy_pred, test_pred
 
 
 def get_ic_params(file):
@@ -490,9 +525,9 @@ def get_ic_params(file):
             params_str += f"{key} = {value}, "
     return BKfile, icstr, params_str[:-2]
 
-def runlogger(file, contents) -> None:
-    ''' f"runinfo-{self.name}.txt" '''
-    with open(general.save_dir + file, "a") as f:
+def runlogger(name: str, contents: dict) -> None:
+    '''  '''
+    with open(f"{general.save_dir}runinfo-{name}.txt", "a") as f:
         for key, value in contents.items():
             f.write(f"{key}: {value}\n")
         f.write("\n")
