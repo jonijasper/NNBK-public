@@ -73,6 +73,7 @@ class TrainingData():
             Defaults to [0.1,1.0]. 
 
     """
+    
     def __init__(self, 
                  name: str, 
                  input_type: str = "F2",
@@ -99,54 +100,6 @@ class TrainingData():
         self.training_files = None
         self.q_list = None
         self.x_list = None
-
-    def plot_saturation_scale(self, satscale=None, satrange=None):
-        if not satscale:
-            satscale = self.settings['saturation_scale']
-        if not satrange:
-            satrange = self.settings['saturation_range']
-
-        satmin = satrange[0]
-        satmax = satrange[1]
-
-        counts = dict()
-        count = 0
-        Qs = []
-
-        for ic in self.settings['parameters']:
-            for i in fileinfo.filenros[ic]["range"]:
-                file = f"{fileinfo.F2}f2_{i}.dat" 
-                if self.settings['input_type'] == 'HERA':
-                    Nrs, rs, stuff = rcs_reader(file)
-                else:
-                    Nrs, rs, F2s = F2_reader(file)
-                
-                r_sat = np.interp(satscale,Nrs,rs)
-                Qs.append(1/r_sat**2)
-
-                if satmin <= Qs[-1] <= satmax:
-                    count +=1
-            indx = list(fileinfo.filenros[ic]["range"])
-            plt.scatter(indx,Qs,label=ic, marker="+")
-            counts[ic] = (count,len(indx))
-            Qs = []
-            count = 0
-
-        print("number of files in each ic that would pass the filter")
-        for key,value in counts.items():
-            print(f"{key}: {value[0]}/{value[1]}")
-        plt.legend()
-        plt.axhline(y = satmin, color = 'r', linestyle = '--')
-        plt.axhline(y = satmax, color = 'r', linestyle = '--')
-        plt.suptitle(f"Saturation scale N$(r^2=1/Q^2_s)$ = {satscale:.2f}\n$Q_s^2$ cut $({satmin}...{satmax})$")
-        plt.legend(loc=2, prop={'size': 8})
-        plt.xlabel("filenro 'f2_i.dat'")
-        plt.ylabel("$Q_s^2$ [GeV$^2$]")
-        plt.yscale("log")
-        plt.tight_layout()
-
-        plt.savefig(f"{general.save_dir}{self.name}-saturation_scales.pdf")
-        plt.show()
 
     def _saturation_filter(self, filelist):
         '''
@@ -339,6 +292,54 @@ class TrainingData():
 
         self.inputs = train_input
         self.outputs = train_output
+    
+    def plot_saturation_scale(self, satscale=None, satrange=None):
+        if not satscale:
+            satscale = self.settings['saturation_scale']
+        if not satrange:
+            satrange = self.settings['saturation_range']
+
+        satmin = satrange[0]
+        satmax = satrange[1]
+
+        counts = dict()
+        count = 0
+        Qs = []
+
+        for ic in self.settings['parameters']:
+            for i in fileinfo.filenros[ic]["range"]:
+                file = f"{fileinfo.F2}f2_{i}.dat" 
+                if self.settings['input_type'] == 'HERA':
+                    Nrs, rs, stuff = rcs_reader(file)
+                else:
+                    Nrs, rs, F2s = F2_reader(file)
+                
+                r_sat = np.interp(satscale,Nrs,rs)
+                Qs.append(1/r_sat**2)
+
+                if satmin <= Qs[-1] <= satmax:
+                    count +=1
+            indx = list(fileinfo.filenros[ic]["range"])
+            plt.scatter(indx,Qs,label=ic, marker="+")
+            counts[ic] = (count,len(indx))
+            Qs = []
+            count = 0
+
+        print("number of files in each ic that would pass the filter")
+        for key,value in counts.items():
+            print(f"{key}: {value[0]}/{value[1]}")
+        plt.legend()
+        plt.axhline(y = satmin, color = 'r', linestyle = '--')
+        plt.axhline(y = satmax, color = 'r', linestyle = '--')
+        plt.suptitle(f"Saturation scale N$(r^2=1/Q^2_s)$ = {satscale:.2f}\n$Q_s^2$ cut $({satmin}...{satmax})$")
+        plt.legend(loc=2, prop={'size': 8})
+        plt.xlabel("filenro 'f2_i.dat'")
+        plt.ylabel("$Q_s^2$ [GeV$^2$]")
+        plt.yscale("log")
+        plt.tight_layout()
+
+        plt.savefig(f"{general.save_dir}{self.name}-saturation_scales.pdf")
+        plt.show()
 
 
 class Network():
@@ -351,6 +352,7 @@ class Network():
         dummy (boolean): Create dummy network to compare scoring
 
     """
+    
     def __init__(self, name: str, dummy=False, **kwargs):
 
         self.name = name
