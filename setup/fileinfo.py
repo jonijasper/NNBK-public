@@ -16,3 +16,5 @@ filenros = {"mvg": {"range": range(1,91), "shape": gamma_shape},
             "atan": {"range": range(261,351),  "shape": gamma_shape},
             "mv2g": {"range": range(351,451),  "shape": gamma2_shape},
             "mvge": {"range": range(451,576),  "shape": gamma_ec_shape}}
+
+

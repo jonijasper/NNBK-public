@@ -73,6 +73,32 @@ class TrainingData():
             Use plot_saturation_scales() method to plot saturation scales.
             Defaults to [0.1,1.0]. 
 
+        equalize (float): Set the max number of files from one ic in training data.
+            Defaults to 30.
+
+        r_min: minimum r value in r lists. Has to be larger than (or equal to) 1e-6.
+            Defaults to 1e-4
+
+        N_logarithm (boolean): take logarithm of N (output) values when creating 
+            output data.
+            Defaults to True.
+
+        R_logarithm (boolean): take logarithm of R (in input) values when creating 
+            input data.
+            Defaults to True.
+
+        F_logarithm (boolean): take logarithm of F2/FL/Sigma (input) values when 
+            creating input data.
+            Defaults to True.
+
+        add_large_r (boolean): adds N(r)=1 values to region r=[1e2,1e3]
+            Defaults to False.
+
+        two_r_input (boolean): use r and log(r) in input
+            Defaults to False
+
+
+
     """
     
     def __init__(self, 
@@ -80,7 +106,14 @@ class TrainingData():
                  input_type: str = "F2",
                  parameters: list|str = ['mvge'],
                  saturation_scale: float = general.SAT_SCALE,
-                 saturation_range: list = [0.1,1.0]
+                 saturation_range: list = [0.1,1.0],
+                 equalize: float = 30,
+                 r_min: float = 1e-4,
+                 N_logarithm: bool = True,
+                 R_logarithm: bool = True,
+                 F_logarithm: bool = True,
+                 add_large_r: bool = False,
+                 two_r_input: bool = False
                  ):
         
         self.name = name
@@ -95,7 +128,14 @@ class TrainingData():
         self.settings = {"input_type": input_type, 
                          "parameters": parameters,
                          "saturation_scale": saturation_scale,
-                         "saturation_range": saturation_range}
+                         "saturation_range": saturation_range,
+                         "equalize": equalize,
+                         "r_min": r_min,
+                         "N_logarithm": N_logarithm,
+                         "R_logarithm": R_logarithm,
+                         "F_logarithm": F_logarithm,
+                         "add_large_r": add_large_r,
+                         "two_r_input": two_r_input}
         
         self.filedict = self._make_filedict()
         self.training_files = None
@@ -175,7 +215,7 @@ class TrainingData():
         rs = rs[_i:]
         return Nrs, rs
     
-    def _make_filelist(self,files_to_skip):
+    def _make_filelist(self,files_to_skip: list):
         '''
         
         '''
@@ -185,10 +225,10 @@ class TrainingData():
             testfiles_removed = [filename for filename in filelist
                     if filename not in files_to_skip]
         
-            # equalize the number of files between ic's according to self.equalize
-            if self.equalize and len(testfiles_removed)>self.equalize:
-                random.seed(general.RAND_SEED)
-                all_files.append(random.sample(testfiles_removed,self.equalize))
+            # equalize the number of files between ic's according to self.settings['equalize']
+            if self.settings['equalize'] and len(testfiles_removed)>self.settings['equalize']:
+                random.seed(general.RANDOM_SEED)
+                all_files.append(random.sample(testfiles_removed,self.settings['equalize']))
                 print(f"{len(all_files[-1])} {ic} files (trimmed to eq)")
             else:
                 all_files.append(testfiles_removed)
@@ -197,6 +237,7 @@ class TrainingData():
         runlogger(self.name,
                     {f"{ic} files": len(all_files[-1])})
         
+        all_files = np.concatenate(all_files)
         return all_files
 
     def _remove_half_params():
@@ -212,7 +253,7 @@ class TrainingData():
         """ Creates input and output for network to use in training
 
         Args:
-            files_to_skip (list): files that will not be added to training data
+            files_to_skip (dict): files that will not be added to training data
                 so they can be used in testing.
 
         """
@@ -230,7 +271,7 @@ class TrainingData():
         train_output = []
 
         for file in self.training_files:
-            if self.hera:
+            if self.settings['input_type'] == 'HERA':
                 Nrs, rs, sigma_df = rcs_reader(file)
                 F2s = sigma_df['Sigma'].tolist()
 
@@ -239,7 +280,7 @@ class TrainingData():
 
             if not self.r_break:
                 for i, r in enumerate(rs):
-                    if r >= self.settings['min_r']:
+                    if r >= self.settings['r_min']:
                         break
                 self.r_break = i
 
@@ -247,11 +288,11 @@ class TrainingData():
             Nrs = Nrs[self.r_break:]
 
             # test smallest r
-            if rs[0] < self.settings['min_r']:
-                raise Exception(f"smallest r={rs[0]} which is smaller than 'min_r':{self.settings['min_r']}")
+            if rs[0] < self.settings['r_min']:
+                raise Exception(f"smallest r={rs[0]} which is smaller than 'r_min':{self.settings['r_min']}")
 
             # deal with N(r)=0 cases, when taking log(N)
-            if self.LOG_N and (0 in Nrs):
+            if self.settings['N_logarithm'] and (0 in Nrs):
                 Nrs,rs = self._remove_N_zeros(Nrs,rs,file)
 
             # add N(r)=1 points to large r 
@@ -267,9 +308,9 @@ class TrainingData():
             filecounter += 1
             
             # add input and output arrays
-            if self.LOG_F:
+            if self.settings['F_logarithm']:
                 F2s = np.log(F2s)
-            if self.LOG_N:
+            if self.settings['N_logarithm']:
                 Nrs = np.log(Nrs)
 
             if self.settings['two_r_input']:
@@ -278,7 +319,7 @@ class TrainingData():
                     train_output.append(_Nr)
             
             else:
-                if self.LOG_R:
+                if self.settings['R_logarithm']:
                     rs = np.log(rs)
             
                 for _Nr,_r in zip(Nrs,rs):
@@ -291,12 +332,12 @@ class TrainingData():
 
 
         runlogger(self.name,
-            {f"{i} rs < min_r={self.settings['min_r']} removed": "",
-            f"{filecounter} different ic in training data":""})
+            {f"{i} rs < r_min={self.settings['r_min']} removed": "",
+            f"{filecounter} files training data":""})
 
-        print(f"\n{filecounter} different ic in training data")
+        print(f"\n{filecounter} files training data")
 
-        if self.hera:
+        if self.settings['input_type'] == 'HERA':
             self.q_list = sigma_df['Q2'].tolist()
             self.x_list= sigma_df['x'].tolist()
 
@@ -315,7 +356,7 @@ class TrainingData():
     
         if not self.r_break:
             for i, r in enumerate(rs):
-                if r >= self.settings['min_r']:
+                if r >= self.settings['r_min']:
                     break
             self.r_break = i
 
@@ -328,11 +369,11 @@ class TrainingData():
         Nrs_interpolator = interpolate.interp1d(rs,Nrs)
         test_Nrs = Nrs_interpolator(test_rs)
 
-        if self.LOG_R:
+        if self.settings['R_logarithm']:
             test_rs = np.log(test_rs)
-        if self.LOG_F:
+        if self.settings['F_logarithm']:
             F2s = np.log(F2s)
-        if self.LOG_N:
+        if self.settings['N_logarithm']:
             test_Nrs = np.log(test_Nrs)
 
         if self.ADD_LOGR:
@@ -410,7 +451,7 @@ class Network():
 
         self.name = name
         self.regressor = MLPRegressor(**kwargs)
-
+        self.dummy_regr = None
         if dummy:
             self.dummy_regr = MLPRegressor()
 
@@ -431,17 +472,13 @@ class Network():
         predlist = []
 
         r_list = np.array(test_input).T[0]
-        # TODO: two r input
-        two_r_input = False
-        if two_r_input:
+
+        if self.settings['two_r_input']:
             f2input = test_input[0][2:]
         else:
             f2input = test_input[0][1:]
 
-        # TODO: make better check if F2 or log(F2)
-        log_F2 = any(f2<0 for f2 in f2input)
-
-        if log_F2:
+        if self.settings['F2_logarithm']:
             f2values = np.exp(f2input)
         else:
             f2values = f2input
@@ -459,14 +496,14 @@ class Network():
                 for f2 in f2values:
                     gaussed_values.append(random.gauss(f2,standard_deviation*f2))
 
-            if log_F2:
+            if self.settings['F2_logarithm']:
                 if any(num_<=0 for num_ in gaussed_values):
                         raise Exception("STAND_DEV too large, non positive F2 values")
                 gauss_in = np.log(gaussed_values)
             else:
                 gauss_in = gaussed_values
 
-            if two_r_input:
+            if self.settings['two_r_input']:
                 gaussian_input = [[r,np.log(r), *gauss_in] for r in r_list]
             else: 
                 gaussian_input = [[r, *gauss_in] for r in r_list]
@@ -492,7 +529,7 @@ class Network():
 
         return pred_std, pred_mean, predlist
 
-    def test(testdata):
+    def test(self,test_id: str,testdata: list):
         '''
         
         '''
@@ -518,7 +555,7 @@ class Network():
                     input_, output_, random_state=general.RANDOM_SEED,
                     train_size=train_frac)
 
-        runlogger(f"runlogs/{training_data.name}-runinfo.txt", 
+        runlogger(training_data.name, 
                     {"Datapoints splitted. Training points (rest for scoretest)":
                         f"{len(train_input)}/{len(input_)}",
                     "Number of inputs": 
@@ -532,22 +569,30 @@ class Network():
         self._test_input = test_input
         self._test_output = test_output
 
-    def score(self, test_input: list =None, test_output: list =None, weights: bool =False):
+    def score(self, exp_output: bool, test_input: list =None, test_output: list =None, weights: bool =False):
         '''
-        
+        R2 score is always calculated from the network output but if dataset has
+        log(N) as output, then the rmse score of the prediction is calculated from 
+        exp(pred) and exp(output).
         '''
-        dummy_pred, test_pred = self.predict(test_input)
         
         if not (test_input and test_output):
             print("using default test split for scoring")
             test_input = self._test_input
             test_output = self._test_output
+        
+        dummy_pred, test_pred = self.predict(test_input)
+        R2_score = self.regressor.score(test_input,test_output)
+        if self.dummy_regr:
+            R2_dummy = self.dummy_regr.score(test_input,test_output)
+        else:
+            R2_dummy = -1
 
-        if self.LOG_N:
+        if exp_output:
+            test_output = np.exp(test_output)
             dummy_pred = np.exp(dummy_pred)
             test_pred = np.exp(test_pred)
-            test_output = np.exp(test_output)
-        
+
         if weights:
             w = 1/np.array(test_pred)
         else:
@@ -556,15 +601,11 @@ class Network():
         rmse_score = metrics.mean_squared_error(test_output,test_pred,
                         sample_weight=w,squared=False)
         
-        R2_score = self.regressor.score(test_input,test_output)
-
         if self.dummy_regr:
             rmse_dummy = metrics.mean_squared_error(test_output,dummy_pred,
-                        sample_weight=w,squared=False)
-            R2_dummy = self.dummy_regr.score(test_input,test_output)
+                        sample_weight=w,squared=False)    
         else:
             rmse_dummy = -1
-            R2_dummy = -1
             
         print(f"{self.name} scores for testgroup (dummy model):\n"\
             f"  R2: {R2_score:.3f} ({R2_dummy:.3f})\n"\
@@ -606,7 +647,7 @@ class Network():
         else:
             dummy_pred = -1
 
-        test_pred = self.nn.predict(input)
+        test_pred = self.regressor.predict(input)
 
         return dummy_pred, test_pred
 
@@ -731,24 +772,31 @@ def time_it(func):
     return wrap_func
 
 @time_it
-def main(datamodels: list|object, testfiles: list|str):
+def main(datamodels: list|object, testfiles: dict):
+    '''
+    testfiles (dictionary(list(str))): form of the dict {'id1':list1, 'id2':list2, ...}
+        where id of test is used in filenames when saving files and list has to be 
+        a list of strings that describe the complete path to the file
+    '''
     # train networks for different data models
     trained_networks = []
+    testfile_list = [file for key,value in testfiles.items() for file in value]
     for data in datamodels:
-        data.create_training_data(files_to_skip=testfiles)
-        nn = Network()
-        nn.train(data,general.train_frac)
-        nn.score(data.testdata)
+        data.create_training_data(testfile_list)
+        nn = Network(data.name)
+        nn.train(data,general.training_fraction)
+        nn.score(exp_output=data.settings['N_logarithm'])
         trained_networks.append(nn)
         
     # run tests for trained networks
     for nn in trained_networks:
-        nn.test(testfiles)
+        for ic,filelist in testfiles.items():
+            nn.test(ic, filelist)
 
 
 if __name__ =="__main__":
     data1 = TrainingData("data_all", parameters = ['all'])
-    data1.plot_saturation_scale()
-    # datamodels = [data1]
-    # testfiles = []
-    # main(datamodels, testfiles)
+    # data1.plot_saturation_scale()
+    datamodels = [data1]
+    testfiles = general.default_f2_tests
+    main(datamodels, testfiles)

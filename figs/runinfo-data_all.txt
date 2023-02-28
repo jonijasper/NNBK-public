@@ -1,0 +1,812 @@
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 different ic in training data: 
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 different ic in training data: 
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 different ic in training data: 
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 different ic in training data: 
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 different ic in training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 different ic in training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 different ic in training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 files training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 files training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 files training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 files training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+R2 score (dummy model): 0.9975992096860903 (-1)
+RMSE (dummy model): 0.08056702821473731 (-1)
+
+atan files: 30
+
+1/85 N(r) values removed (N=0) from: 
+f2_45.dat (mvg45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_18.dat (mvg18)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_471.dat (mvge_21)
+$Q_{s0}^2$ = 0.1, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_498.dat (mvge_48)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 16
+
+2/85 N(r) values removed (N=0) from: 
+f2_497.dat (mvge_47)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 4
+
+2/85 N(r) values removed (N=0) from: 
+f2_496.dat (mvge_46)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 1
+
+2/85 N(r) values removed (N=0) from: 
+f2_500.dat (mvge_50)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2.0, $e_c$ = 100
+
+3/85 N(r) values removed (N=0) from: 
+f2_251.dat (gbw81)
+$Q_{s0}^2$ = 0.45, $\gamma$ = 2
+
+3/85 N(r) values removed (N=0) from: 
+f2_242.dat (gbw72)
+$Q_{s0}^2$ = 0.4, $\gamma$ = 2
+
+5/85 N(r) values removed (N=0) from: 
+f2_215.dat (gbw45)
+$Q_{s0}^2$ = 0.25, $\gamma$ = 2
+
+6/85 N(r) values removed (N=0) from: 
+f2_206.dat (gbw36)
+$Q_{s0}^2$ = 0.2, $\gamma$ = 2
+
+4/85 N(r) values removed (N=0) from: 
+f2_224.dat (gbw54)
+$Q_{s0}^2$ = 0.3, $\gamma$ = 2
+
+skipped/ics: 
+
+mvg: 0
+mve: 0
+gbw: 0
+atan: 0
+mv2g: 0
+mvge: 0
+
+15 rs < r_min=0.0001 removed: 
+180 files training data: 
+
+Datapoints splitted. Training points (rest for scoretest): 13735/15262
+Number of inputs: 151
+
+R2 score (dummy model): 0.9952108854390113 (-1)
+RMSE (dummy model): 0.13186262864588086 (-1)
+
