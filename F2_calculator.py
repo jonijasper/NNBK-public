@@ -4,6 +4,8 @@ from scipy import integrate, interpolate
 from scipy import special
 import numpy as np
 
+from main import time_it
+
 mf = 0.14   # quark mass
 Nc = 3  # number of colors
 K0 = lambda x: special.k0(x)    # bessel
@@ -18,7 +20,7 @@ default_Qsqr = list(map(int,np.logspace(0,2,5)))[:-1]
 # z_opts = {'limit':50,'epsrel':1e-2}
 # r_opts = z_opts
 
-
+@time_it
 def photon_wf_T(z,r,Q2):
     af = np.sqrt(Q2 * z*(1-z) + mf**2) 
     sum_ = 0
@@ -28,6 +30,7 @@ def photon_wf_T(z,r,Q2):
 
     return 2*Nc*sum_
 
+@time_it
 def photon_wf_L(z,r,Q2):
     af = np.sqrt(Q2 * z*(1-z) + mf**2)
     sum_ = 0
@@ -36,6 +39,7 @@ def photon_wf_L(z,r,Q2):
 
     return 2*Nc*sum_
 
+@time_it
 def cs_dipole_MV(r):
     # dipole amplitude parameters
     Qs0sqr = 0.165
@@ -52,6 +56,7 @@ def cs_dipole_MV(r):
     int_db = sigma0/2
     return 2*int_db*N_MV(r)
 
+@time_it
 def cs_dipole(r,N):
     if not N:
         return cs_dipole_MV(r)
@@ -59,28 +64,35 @@ def cs_dipole(r,N):
 
     return 2*int_db*N(r)
 
+@time_it
 def integrand_T(z,r,Q2,dip):
     return r/2*photon_wf_T(z,r,Q2)*cs_dipole(r,dip)
 
+@time_it
 def integrand_L(z,r,Q2,dip):
     return r/2*photon_wf_L(z,r,Q2)*cs_dipole(r,dip)
 
+@time_it
 def r_integral_T(r0,r1,z_integrated):
     cs = integrate.quad(z_integrated,r0,r1)[0]
     return cs
 
+@time_it
 def r_integral_L(r0,r1,z_integrated):
     cs = integrate.quad(z_integrated,r0,r1)[0]
     return cs
 
+@time_it
 def z_integral_T(z0,z1,r,Q2,dip):
     ft = integrate.quad(integrand_T,z0,z1,args=(r,Q2,dip))[0]
     return ft
 
+@time_it
 def z_integral_L(z0,z1,r,Q2,dip):
     fl = integrate.quad(integrand_L,z0,z1,args=(r,Q2,dip))[0]
     return fl
 
+@time_it
 def calculate_F2s(r,Q2list,dipole_amplitudes,return_values,*,zlims=None,ylist=None):
     '''
     args
@@ -189,7 +201,7 @@ def calculate_F2s(r,Q2list,dipole_amplitudes,return_values,*,zlims=None,ylist=No
 if __name__=="__main__":
     def plott(z,r,Q2list):
         plotlist = ["zintegral_T", "zintegral_L", "F2", "FT", "FL"]
-        plotvals = calc_F2s(r,Q2list,dipole_amplitudes="MV",zlims=z,
+        plotvals = calculate_F2s(r,Q2list,dipole_amplitudes="MV",zlims=z,
                             return_values=plotlist)
 
         fig, axs = plt.subplots(1,len(plotlist),figsize=(3*len(plotlist),4))

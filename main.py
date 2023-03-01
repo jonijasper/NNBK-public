@@ -45,6 +45,132 @@ from sklearn import model_selection, metrics
 from setup import fileinfo, general
 
 
+def time_it(func):
+    '''This function shows the execution time of 
+    the function object passed'''
+    def wrap_func(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        exec_time = time.time() - start_time
+        if exec_time >= 60*60:
+            exec_time = f"{exec_time/60/60:.2f} hours"
+        elif exec_time >= 60:
+            exec_time = f"{exec_time/60:.2f} minutes"
+        else:
+            exec_time = f"{exec_time:.2f} seconds"
+            
+        with open("execution_times.txt",'w') as f:
+            f.write(f'Function {func.__name__!r} executed in {exec_time}')
+        
+        if func.__name__ == "main":
+            print(f'Function {func.__name__!r} executed in {exec_time}')
+
+        return result
+    return wrap_func
+
+# @time_it
+def get_ic_params(file):
+    with open(file) as f:
+        BKfile = f.read().split('#')[1].split()[0].split('/')[-1].split('.')[0]
+        if '_' in BKfile:
+            icstr, nrstr = BKfile.split('_')
+        
+        else:
+            icstr = ""
+            nrstr = ""
+            for char in BKfile:
+                if char.isdigit():
+                    nrstr+=char
+                if char.isalpha():
+                    icstr+=char
+    infofile=f"../NNBK/data/datafiles/BKevo/constant-coupling/_info_{icstr}.txt"
+    row_nr = int(nrstr) -1
+    with open(infofile) as f:
+        ic_params = f.read().split('\n')[row_nr].split(': ')[-1]
+    asd = ic_params.split(', ')
+    if icstr=="mv2g":
+        Q1 = float(asd[0].split('=')[1])
+        Q2 = float(asd[1].split('=')[1])
+        g1 = float(asd[2].split('=')[1])
+        g2 = float(asd[3].split('=')[1])
+        params = {"$Q_{s0,1}^2$": Q1,
+                    "$\gamma_1$": g1,
+                    "$Q_{s0,2}^2$": Q2,
+                    "$\gamma_2$":g2}
+    else:
+        Qs02 = float(asd[0].split('=')[1])
+        params = {"$Q_{s0}^2$": Qs02}
+        
+        for x in asd[1:]:
+            y= x.split('=')
+            if y[0] == "gamma":
+                params["$\gamma$"] = y[1]
+            if y[0] == "ec":
+                params["$e_c$"] = y[1]
+    
+    params_str = ""
+    for key, value in params.items():
+        if key == "$\gamma_1$":
+            params_str += f"{key} = {value},\n        "
+        else:
+            params_str += f"{key} = {value}, "
+    return BKfile, icstr, params_str[:-2]
+
+# @time_it
+def runlogger(name: str, contents: dict) -> None:
+    '''  '''
+    with open(f"{general.save_dir}runinfo-{name}.txt", "a") as f:
+        for key, value in contents.items():
+            f.write(f"{key}: {value}\n")
+        f.write("\n")
+
+# @time_it
+def F2_reader(filename: str) -> list:
+    '''reads .dat files made with BKtoF2-calculator'''
+
+    with open(filename) as f:
+        content = f.read().split("###")
+
+    content = content[1:]   # gets rid of the stuff at the beginning
+    content = [i.split() for i in content] # cleans up lines
+    thedata = []
+    for i in content:
+        x = list(map(float, i))
+        thedata.append(x)
+
+    Nrs, rs, F2s = thedata
+
+    return Nrs, rs, F2s
+
+@time_it
+def rcs_reader(filename: str) -> tuple:
+    '''reads .dat files made with BKtoCS-calculator'''
+
+    with open(filename) as f:
+        stuff, initN, rs, sigmaym = f.read().split("###")
+
+    initN = initN.split() # cleans up lines
+    initN = list(map(float,initN))
+    rs = rs.split() # cleans up lines
+    rs = list(map(float,rs))
+
+    sigmaym = sigmaym.split('\n')[1:]
+    titles = sigmaym[0].split()
+    sigma_dict = dict()
+
+    sigmalist = []
+    for row in sigmaym[1:]:
+        temp = row.split()
+        sigmalist.append(list(map(float,temp)))
+    sigmalist = np.array(sigmalist)
+    for title_,list_ in zip(titles,sigmalist.T):
+        sigma_dict[title_] = list_
+    
+    sigma_df = pd.DataFrame.from_dict(sigma_dict)
+
+    return initN, rs, sigma_df
+
+
 class TrainingData():
     """Training data model
 
@@ -101,6 +227,7 @@ class TrainingData():
 
     """
     
+    # @time_it
     def __init__(self, 
                  name: str, 
                  input_type: str = "F2",
@@ -143,6 +270,7 @@ class TrainingData():
         self.x_list = None
         self.r_break = None
 
+    # @time_it
     def _saturation_filter(self, filelist):
         '''
         '''
@@ -171,6 +299,7 @@ class TrainingData():
 
         return filtered_files
 
+    # @time_it
     def _make_filedict(self):
         '''
         
@@ -187,6 +316,7 @@ class TrainingData():
 
         return all_files
 
+    # @time_it
     def _remove_N_zeros(self,Nrs,rs,file):
         '''
         
@@ -215,6 +345,7 @@ class TrainingData():
         rs = rs[_i:]
         return Nrs, rs
     
+    # @time_it
     def _make_filelist(self,files_to_skip: list):
         '''
         
@@ -240,15 +371,19 @@ class TrainingData():
         all_files = np.concatenate(all_files)
         return all_files
 
+    @time_it
     def _remove_half_params():
         pass
 
+    @time_it
     def _remove_half_F2s():
         pass
     
+    @time_it
     def _input_interpolator():
         pass
 
+    # @time_it
     def create_training_data(self, files_to_skip: list):
         """ Creates input and output for network to use in training
 
@@ -344,6 +479,7 @@ class TrainingData():
         self.inputs = train_input
         self.outputs = train_output
     
+    @time_it
     def create_test_data(self, file, testpoint_count):
         '''
         
@@ -387,6 +523,7 @@ class TrainingData():
         else:
             return input, output, F2s_orig
     
+    @time_it
     def plot_saturation_scale(self, satscale=None, satrange=None):
         if not satscale:
             satscale = self.settings['saturation_scale']
@@ -447,6 +584,7 @@ class Network():
 
     """
     
+    # @time_it
     def __init__(self, name: str, dummy=False, **kwargs):
 
         self.name = name
@@ -455,6 +593,7 @@ class Network():
         if dummy:
             self.dummy_regr = MLPRegressor()
 
+    @time_it
     def _prediction_uncertainty(self,
                                 test_input, 
                                 number_of_variations: int =100, 
@@ -529,12 +668,14 @@ class Network():
 
         return pred_std, pred_mean, predlist
 
+    @time_it
     def test(self,test_id: str,testdata: list):
         '''
         
         '''
         pass
 
+    @time_it
     def train(self, training_data: TrainingData, train_frac: float):
         '''Trains the network
         
@@ -569,6 +710,7 @@ class Network():
         self._test_input = test_input
         self._test_output = test_output
 
+    # @time_it
     def score(self, exp_output: bool, test_input: list =None, test_output: list =None, weights: bool =False):
         '''
         R2 score is always calculated from the network output but if dataset has
@@ -615,6 +757,7 @@ class Network():
                     {"R2 score (dummy model)": f"{R2_score} ({R2_dummy})",
                     f"RMSE (dummy model)": f"{rmse_score} ({rmse_dummy})",})
 
+    @time_it
     def plot_testgroup_predictions(self, test_output, preds):
         '''
         
@@ -638,6 +781,7 @@ class Network():
         # plt.close(fig0)
         pass
 
+    @time_it
     def predict(self, input):
         '''
         
@@ -651,125 +795,10 @@ class Network():
 
         return dummy_pred, test_pred
 
+    @time_it
     def loss_plot():
         pass
 
-
-def get_ic_params(file):
-    with open(file) as f:
-        BKfile = f.read().split('#')[1].split()[0].split('/')[-1].split('.')[0]
-        if '_' in BKfile:
-            icstr, nrstr = BKfile.split('_')
-        
-        else:
-            icstr = ""
-            nrstr = ""
-            for char in BKfile:
-                if char.isdigit():
-                    nrstr+=char
-                if char.isalpha():
-                    icstr+=char
-    infofile=f"../NNBK/data/datafiles/BKevo/constant-coupling/_info_{icstr}.txt"
-    row_nr = int(nrstr) -1
-    with open(infofile) as f:
-        ic_params = f.read().split('\n')[row_nr].split(': ')[-1]
-    asd = ic_params.split(', ')
-    if icstr=="mv2g":
-        Q1 = float(asd[0].split('=')[1])
-        Q2 = float(asd[1].split('=')[1])
-        g1 = float(asd[2].split('=')[1])
-        g2 = float(asd[3].split('=')[1])
-        params = {"$Q_{s0,1}^2$": Q1,
-                    "$\gamma_1$": g1,
-                    "$Q_{s0,2}^2$": Q2,
-                    "$\gamma_2$":g2}
-    else:
-        Qs02 = float(asd[0].split('=')[1])
-        params = {"$Q_{s0}^2$": Qs02}
-        
-        for x in asd[1:]:
-            y= x.split('=')
-            if y[0] == "gamma":
-                params["$\gamma$"] = y[1]
-            if y[0] == "ec":
-                params["$e_c$"] = y[1]
-    
-    params_str = ""
-    for key, value in params.items():
-        if key == "$\gamma_1$":
-            params_str += f"{key} = {value},\n        "
-        else:
-            params_str += f"{key} = {value}, "
-    return BKfile, icstr, params_str[:-2]
-
-def runlogger(name: str, contents: dict) -> None:
-    '''  '''
-    with open(f"{general.save_dir}runinfo-{name}.txt", "a") as f:
-        for key, value in contents.items():
-            f.write(f"{key}: {value}\n")
-        f.write("\n")
-
-def F2_reader(filename: str) -> list:
-    '''reads .dat files made with BKtoF2-calculator'''
-
-    with open(filename) as f:
-        content = f.read().split("###")
-
-    content = content[1:]   # gets rid of the stuff at the beginning
-    content = [i.split() for i in content] # cleans up lines
-    thedata = []
-    for i in content:
-        x = list(map(float, i))
-        thedata.append(x)
-
-    Nrs, rs, F2s = thedata
-
-    return Nrs, rs, F2s
-
-def rcs_reader(filename: str) -> tuple:
-    '''reads .dat files made with BKtoCS-calculator'''
-
-    with open(filename) as f:
-        stuff, initN, rs, sigmaym = f.read().split("###")
-
-    initN = initN.split() # cleans up lines
-    initN = list(map(float,initN))
-    rs = rs.split() # cleans up lines
-    rs = list(map(float,rs))
-
-    sigmaym = sigmaym.split('\n')[1:]
-    titles = sigmaym[0].split()
-    sigma_dict = dict()
-
-    sigmalist = []
-    for row in sigmaym[1:]:
-        temp = row.split()
-        sigmalist.append(list(map(float,temp)))
-    sigmalist = np.array(sigmalist)
-    for title_,list_ in zip(titles,sigmalist.T):
-        sigma_dict[title_] = list_
-    
-    sigma_df = pd.DataFrame.from_dict(sigma_dict)
-
-    return initN, rs, sigma_df
-
-def time_it(func):
-    '''This function shows the execution time of 
-    the function object passed'''
-    def wrap_func(*args, **kwargs):
-        start_time = time.time()
-        result = func(*args, **kwargs)
-        exec_time = time.time() - start_time
-        if exec_time >= 60*60:
-            exec_time = f"{exec_time/60/60:.2f} hours"
-        elif exec_time >= 60:
-            exec_time = f"{exec_time/60:.2f} minutes"
-        else:
-            exec_time = f"{exec_time:.2f} seconds"
-            
-        print(f'Function {func.__name__!r} executed in {exec_time}')
-        return result
-    return wrap_func
 
 @time_it
 def main(datamodels: list|object, testfiles: dict):
